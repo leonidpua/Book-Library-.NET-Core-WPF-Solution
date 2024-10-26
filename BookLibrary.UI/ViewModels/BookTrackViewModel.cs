@@ -80,7 +80,8 @@ namespace BookLibrary.UI.ViewModels
 
         public async Task LoadBookTrack()
         {
-            Book = await booksRepository.GetBookTrack(AppUser.GetInstance().AccountId, _book.BookId, _filter);
+            Book = int.TryParse(_filter, out int filter) ? await booksRepository.GetBookTrack(AppUser.GetInstance().AccountId, _book.BookId, filter) :
+                await booksRepository.GetBookTrack(AppUser.GetInstance().AccountId, _book.BookId);
         }
 
         public async Task PutBook()

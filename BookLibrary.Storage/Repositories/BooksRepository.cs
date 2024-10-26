@@ -108,7 +108,7 @@ namespace BookLibrary.Storage.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<BookTrackList> GetBookTrack(Guid accountId, Guid bookId, string tracksCount)
+        public Task<BookTrackList> GetBookTrack(Guid accountId, Guid bookId, int tracksCount = 0)
         {
             var result = new BookTrackList();
             using var dbContext = new BookLibraryContext();
@@ -129,9 +129,9 @@ namespace BookLibrary.Storage.Repositories
                 if (profileRecord != null)
                 {
                     var tracksQuery = dbContext.BookTracking.Where(record => record.BookId == bookId).OrderByDescending(record => record.ActionTime);
-                    if (!tracksCount.Equals("All", StringComparison.OrdinalIgnoreCase))
+                    if (tracksCount > 0)
                     {
-                        tracksQuery = tracksQuery.Take(int.Parse(tracksCount)).OrderByDescending(record => record.ActionTime);
+                        tracksQuery = tracksQuery.Take(tracksCount).OrderByDescending(record => record.ActionTime);
                     }
 
                     var tracksQueryJoinAccounts = tracksQuery.Join(

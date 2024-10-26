@@ -58,7 +58,7 @@ namespace BookLibrary.UI.Pages
         {
             var book = BooksGrid.SelectedItem as Models.BooksModels.Book;
             if (book == null) return;
-            var trackBook = await booksRepository.GetBookTrack(AppUser.GetInstance().AccountId, book.Id ?? Guid.NewGuid(), "All");
+            var trackBook = await booksRepository.GetBookTrack(AppUser.GetInstance().AccountId, book.Id ?? Guid.NewGuid());
             NavigationService.Navigate(new BookTrackPage(trackBook));
         }
 

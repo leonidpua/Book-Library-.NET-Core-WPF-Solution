@@ -17,7 +17,7 @@ namespace BookLibrary.Storage.Repositories
         Task<List<Book>> GetBooksByUser(Guid userId, string searchString = "", int from = 0, int count = 10);
         Task<int> GetBooksByUserTotalCount(Guid userId, string searchString = "");
         Task<int> GetBooksTotalCount(string searchString = "");
-        Task<BookTrackList> GetBookTrack(Guid accountId, Guid bookId, string tracksCount);
+        Task<BookTrackList> GetBookTrack(Guid accountId, Guid bookId, int tracksCount = 0);
         Task PutBook(Guid accountId, Guid bookId);
         Task TakeBook(Guid accountId, Guid bookId);
         Task UpdateBook(Book book);
