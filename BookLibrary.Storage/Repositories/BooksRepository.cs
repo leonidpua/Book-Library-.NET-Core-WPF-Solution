@@ -129,7 +129,7 @@ namespace BookLibrary.Storage.Repositories
                 if (profileRecord != null)
                 {
                     var tracksQuery = dbContext.BookTracking.Where(record => record.BookId == bookId).OrderByDescending(record => record.ActionTime);
-                    if (tracksCount != "All")
+                    if (!tracksCount.Equals("All", StringComparison.OrdinalIgnoreCase))
                     {
                         tracksQuery = tracksQuery.Take(int.Parse(tracksCount)).OrderByDescending(record => record.ActionTime);
                     }
